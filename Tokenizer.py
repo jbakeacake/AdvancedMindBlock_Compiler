@@ -95,9 +95,12 @@ def tokenizeString(input, current):
             if char == None:
                 print("ERROR: Unterminated String")
                 return;
-            value += char
-            consumedChars += 1
-            char = input[current + consumedChars]
+            if (current + consumedChars + 1) < len(input):
+                value += char;
+                consumedChars += 1
+                char = input[current + consumedChars]
+            else:
+                break
         token["type"] = "characterString"
         token["value"] = value;
         return [consumedChars, token]
@@ -158,12 +161,11 @@ def skipWhiteSpace(input, current):
     return [0, None]
 
 #This is a list of all our tokenizers that we will iterate through to allow us tokenize the given string
-tokenizers = [
+tokenizers = [ # Removed 'tokenizeQuote' until reformatting is done
     tokenizeNumber,
     tokenizeName,
     tokenizeSoftOpen,
     tokenizeSoftClose,
-    tokenizeQuote,
     tokenizeString,
     tokenizeSemi,
     tokenizeAssignment,
@@ -210,7 +212,7 @@ keywords = [
 # print(token_num)
 # print(token_ass)
 
-testTokens = Tokenizer("INT num := 32;")
-print("\n> OUR INPUT: \t INT label := 32; \n")
+testTokens = Tokenizer('STRING str := "Hello World!";')
+print("\n> OUR INPUT: \t STRING str := 'Hello World!' \n")
 for token in testTokens:
     print(token)
