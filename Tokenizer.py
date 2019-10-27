@@ -23,16 +23,18 @@ def Tokenizer(input):
     current = 0; # start of the line
     tokens = [] # our token stack
     while current < len(input):
-        tokenized = False # this represents whether or not we have found the right tokenizer for our input
+        tokenized = False # this represents whether or not we have found the right tokenizer for the current part of the input
         for func in tokenizers:
-            if tokenized:
+            if tokenized :
+                print("BREAK")
                 break;
             token = func(input, current)
-            if token["length"] != 0:
-                print(func)
-                tokenized = True;
-                current += token["length"]
-            if token["length"] != 0:
+            #Check if the token's consumed amount of chars is not '0' -- we check length to consume skipped white spaces
+            if token[0] != 0:
+                tokenized = True
+                current += token[0]
+            #If the token is not a skipped white space, append it to the end of our list:
+            if token[1] != None:
                 tokens.append(token)
         #If we've iterated through all of our functions without successfully tokenizing, print an error:
         if not tokenized:
@@ -47,34 +49,34 @@ def tokenizeNumber(input, current):
     return tokenizePattern("digit", "[0-9]+", input, current);
 
 def tokenizeName(input, current):
-    return tokenizePattern("symbol", "[A-Za-z]|[_]", input, current); # we're overriding our 'type' parameter if our input is a keyword (this happens inside the tokenizePattern function)
+    return tokenizePattern("label", "[A-Za-z]|[_]", input, current); # we're overriding our 'type'("label") parameter if our input is a keyword (this happens inside the tokenizePattern function)
 
 def tokenizeSoftOpen(input, current):
-    return tokenizeCharacter("symbol", "[(]", input, current);
+    return tokenizeCharacter("softOpen", "[(]", input, current);
 
 def tokenizeSoftClose(input, current):
-    return tokenizeCharacter("symbol", "[)]", input, current);
+    return tokenizeCharacter("softClose", "[)]", input, current);
 
 def tokenizeQuote(input, current):
-    return tokenizeCharacter("symbol", '["]', input, current);
+    return tokenizeCharacter("quote", '["]', input, current);
 
 def tokenizeSemi(input, current):
-    return tokenizeCharacter("symbol", "[;]", input, current);
+    return tokenizeCharacter("semi", "[;]", input, current);
 
 def tokenizeAssignment(input, current):
-    return tokenizePattern("symbol", "[:=]", input, current);
+    return tokenizePattern("assignment", "[:=]", input, current);
 
 def tokenizeColon(input, current):
-    return tokenizeCharacter("symbol", "[:]", input, current);
+    return tokenizeCharacter("colon", "[:]", input, current);
 
 def tokenizeMultOp(input, current):
-    return tokenizeCharacter("symbol", "[*]|[/]", input, current);
+    return tokenizeCharacter("multOp", "[*]|[/]", input, current);
 
 def tokenizeAddOp(input, current):
-    return tokenizeCharacter("symbol", "[+]|[-]", input, current);
+    return tokenizeCharacter("addOp", "[+]|[-]", input, current);
 
 def tokenizeCompOp(input, current):
-    return tokenizePattern("symbol", "[<]|[<=]|[>]|[>=]|[=]|[!=]", input, current)
+    return tokenizePattern("compOp", "[<]|[<=]|[>]|[>=]|[=]|[!=]", input, current)
 
 # tokenizeString(input, current) : token
 #
@@ -96,15 +98,11 @@ def tokenizeString(input, current):
             value += char
             consumedChars += 1
             char = input[current + consumedChars]
-        token["length"] = consumedChars
-        token["type"] = "KEYWORD"
+        token["type"] = "characterString"
         token["value"] = value;
-        return token
+        return [consumedChars, token]
     else:
-        token["length"] = 0
-        token["type"] = None
-        token["value"] = None
-        return token;
+        return [0, None]
 
 #
 # Tokenize Helper Functions:
@@ -114,16 +112,11 @@ def tokenizeCharacter(type, value, input, current):
     token = {};
     # if our value matches what the current character is, add values to our object and return:
     if re.search(value, input[current]) != None:
-        token["length"] = 1
         token["type"] = type
         token["value"] = input[current]
-        return token
-    else: # Otherwise, return an error:
-        print("Not found")
-        token["length"] = 0
-        token["type"] = None
-        token["value"] = None
-        return token;
+        return [1, token]
+    else: # Otherwise, return an error with a "None" token
+        return [0, None]
 
 def tokenizePattern(type, pattern , input, current):
     char = input[current] # init our first character in the string
@@ -133,38 +126,36 @@ def tokenizePattern(type, pattern , input, current):
         value = '' # init our handle on the whole value of the token
         if len(input) == 1:
             consumedChars += 1
-            value += char;
+            value += char
         else:
-            while (re.search(pattern, char) != None) and (consumedChars < len(input)): # Build up our token character by character, incrementing consumedChars and moving our current character through the string
-                value += char;
-                consumedChars += 1
-                char = input[current + consumedChars]
-
+            while (re.search(pattern, char) != None) and ((current + consumedChars) < len(input)): # Build up our token character by character, incrementing consumedChars and moving our current character through the string
+                value += char
+                if (current + consumedChars + 1) < len(input):
+                    consumedChars += 1
+                    char = input[current + consumedChars]
+                else:
+                    break
+                
         #override our passed in "type" if this value is a keyword:
         if value in keywords:
             token["type"] = "keyword"
+            token["value"] = value
+            return [consumedChars, token]
         else:
             token["type"] = type
-        token["length"] = consumedChars
-        token["value"] = value
-        return token
+            token["value"] = value
+            return [consumedChars, token]
     else:
-        print("Not found")
-        token["length"] = 0
-        token["type"] = None
-        token["value"] = None
-        return token;
+        return [0, None];
 
 def skipWhiteSpace(input, current):
-    emptyToken = {}
-    emptyToken["length"] = 0
-    emptyToken["type"] = None
-    emptyToken["value"] = None
+    token = {}
+    token["type"] = None
+    token["value"] = None
 
     if input[current] == " ":
-        emptyToken["length"] = 1
-        return emptyToken
-    return emptyToken;
+        return [1, None]
+    return [0, None]
 
 #This is a list of all our tokenizers that we will iterate through to allow us tokenize the given string
 tokenizers = [
@@ -204,13 +195,13 @@ keywords = [
     "INPUT"
 ]
 
-# token_g = tokenizeCompOp("> ", 0)
-# token_ge = tokenizeCompOp(">= ", 0)
-# token_l = tokenizeCompOp("< ", 0)
-# token_le = tokenizeCompOp("<= ", 0)
+# token_g = tokenizeCompOp(">", 0)
+# token_ge = tokenizeCompOp(">=", 0)
+# token_l = tokenizeCompOp("<", 0)
+# token_le = tokenizeCompOp("<=", 0)
 # token_name = tokenizeName("START_PROGRAM bingo", 0)
-# token_num = tokenizeNumber("1200000000034 ",0)
-# token_ass = tokenizeAssignment(":= ",0)
+# token_num = tokenizeNumber("1200000000034",0)
+# token_ass = tokenizeAssignment(":=",0)
 # print(token_g)
 # print(token_ge)
 # print(token_l)
@@ -219,7 +210,7 @@ keywords = [
 # print(token_num)
 # print(token_ass)
 
-testTokens = Tokenizer("INT label := 32;")
-print("\nOUR INPUT:  'INT label := 32;' \n")
+testTokens = Tokenizer("INT num := 32;")
+print("\n> OUR INPUT: \t INT label := 32; \n")
 for token in testTokens:
     print(token)
