@@ -25,21 +25,19 @@ def Tokenizer(input):
     while current < len(input):
         tokenized = False # this represents whether or not we have found the right tokenizer for the current part of the input
         for func in tokenizers:
-            if tokenized :
-                print("BREAK")
-                break;
+            if tokenized:
+                break
             token = func(input, current)
-            #Check if the token's consumed amount of chars is not '0' -- we check length to consume skipped white spaces
+            #Check if the token's consumed amount of chars is not '0' -- we check length instead of nullity to consume skipped white spaces
             if token[0] != 0:
                 tokenized = True
                 current += token[0]
-            #If the token is not a skipped white space, append it to the end of our list:
+            #If the token is not a skipped white space and exists, append it to the end of our list:
             if token[1] != None:
-                tokens.append(token)
+                tokens.append(token[1])
         #If we've iterated through all of our functions without successfully tokenizing, print an error:
         if not tokenized:
-            print("Error: Unknown character");
-            break;
+            break
     return tokens
 
 #
@@ -103,7 +101,7 @@ def tokenizeString(input, current):
                 break
         token["type"] = "characterString"
         token["value"] = value;
-        return [consumedChars, token]
+        return [consumedChars + 1, token] # '+1' so we consume the following end quote
     else:
         return [0, None]
 
@@ -152,10 +150,6 @@ def tokenizePattern(type, pattern , input, current):
         return [0, None];
 
 def skipWhiteSpace(input, current):
-    token = {}
-    token["type"] = None
-    token["value"] = None
-
     if input[current] == " ":
         return [1, None]
     return [0, None]
@@ -212,7 +206,7 @@ keywords = [
 # print(token_num)
 # print(token_ass)
 
-testTokens = Tokenizer('STRING str := "Hello World!";')
-print("\n> OUR INPUT: \t STRING str := 'Hello World!' \n")
-for token in testTokens:
-    print(token)
+# testTokens = Tokenizer('STRING str := "Hello World!";')
+# print("\n> OUR INPUT: \t STRING str := 'Hello World!' \n")
+# for token in testTokens:
+#     print(token)
