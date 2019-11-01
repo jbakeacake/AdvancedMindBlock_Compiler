@@ -35,7 +35,6 @@ def parseTokens(tokens):
                     currentNode.addChild("Factor")
                     currentNode.addChild("Factor Tail")
                 else:
-                    print(tokens[idx].get("type"))
                     raise Exception("Error on Term")
             elif currentNode.type is "Factor Tail":
                 if tokens[idx].get("type") is "multOp":
@@ -67,3 +66,4 @@ for token in tokens:
     print(token)
 
 pt = parseTokens(tokens)
+pt.dumpTree()
