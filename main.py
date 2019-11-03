@@ -1,15 +1,19 @@
-predictSet = {
-    "label" : ["LineLabel"],
-    "IF" : ["Condition"],
-    "WHILE" : ["Loop"],
-    "PRINT" : ["PRINT(Expression)"], #placeholder till I figure out how to parse this
-    "GOSUB" : ["GOSUB", "label"],
-    }
-currentToken = {
-    "type" : "GOSUB"
-}
+from ParseProgram import parseProgram
+from FileManager import readFile
+from ParseTree import Node
+from ParseTree import ParseTree
+from Tokenizer import *
 
-if predictSet.get(currentToken.get("type")) != None:
-    children = predictSet.get(currentToken.get("type"));
-    for item in children:
-        print(item)
+fileName = input("Please input the name of your '.amb' file:")
+
+fileContent = readFile(fileName)
+
+print(fileContent)
+
+tokens = Tokenizer(fileContent)
+for tok in tokens:
+    print(tok)
+
+parseTree = ParseTree()
+parseProgram(parseTree.head, tokens)
+parseTree.dumpTree()

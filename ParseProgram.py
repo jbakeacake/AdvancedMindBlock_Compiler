@@ -31,7 +31,9 @@ def parseProgram(currentNode, tokens, idx=0):
         "Term Tail" : addTermTailChildren,
         "Term" : addTermChildren,
         "Factor Tail" : addFactorTailChildren,
-        "Factor" : addFactorChildren
+        "Factor" : addFactorChildren,
+        "PossibleArray" : addPossibleArrayChildren
+
     }
 
     while idx < len(tokens) and currentNode != None:
@@ -169,15 +171,3 @@ def parseTokenLiteral(currentNode, currentToken):
         currentNode.value = currentToken.get("value")
     else:
         raise Exception("Error on Token")
-
-input = "START_PROGRAM [INT] hi [3]; [STRING] bye [2]; CODE START_SUB main: hi := 2 + 3 * 4; bye := INPUT; IF hi > 0 THEN PRINT(bye); ELSE PRINT(hi); END_IF END_SUB. END_PROGRAM."
-
-testTokens = Tokenizer(input)
-for token in testTokens:
-    print(token)
-
-pt = ParseTree()
-
-parseProgram(pt.head, testTokens)
-
-pt.dumpTree()

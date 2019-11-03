@@ -126,7 +126,31 @@ def addFactorChildren(currentNode, currentToken):
         currentNode.addChild("characterString", None, "token")
     elif currentToken.get("type") in predictSet_3:
         currentNode.addChild("label", None, "token")
+        currentNode.addChild("PossibleArray")
 
+def addPossibleArrayChildren(currentNode, currentToken):
+    predictSet_0 = [
+        "hardOpen"
+    ]
+
+    predictSet_1 = [
+        "multOp",
+        "addOp",
+        "compOp",
+        "DO",
+        "softClose",
+        "semi",
+        "THEN"
+    ]
+
+    if currentToken.get("type") in predictSet_0:
+        currentNode.addChild("hardOpen", None, "token")
+        currentNode.addChild("digit", None, "token")
+        currentNode.addChild("hardClose", None, "token")
+    elif currentToken.get("type") in predictSet_1:
+        currentNode.addChild(None)
+    else:
+        raise Exception("Error on Possible Array")
 
 # line = "2 + 3 * 4;"
 # tokens = Tokenizer(line)

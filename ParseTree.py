@@ -36,7 +36,7 @@ class Node:
             
 class ParseTree:
     def __init__(self, type = None):
-        self.head = Node("Program", None) # for purposes of testing, lets start with expression
+        self.head = Node("Program", None)
 
     def dumpTree(self):
         self.head.dumpNode(0)

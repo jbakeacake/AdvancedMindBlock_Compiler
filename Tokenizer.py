@@ -69,8 +69,9 @@ def tokenizeSemi(input, current):
 
 def tokenizeColon(input, current):
     #special case to make sure this colon isn't followed by an equals:
-    if input[current + 1] == "=":
-        return [0, None]
+    if current + 1 < len(input):
+        if input[current + 1] == "=":
+            return [0, None]
     return tokenizeCharacter("colon", "[:]", input, current);
 
 def tokenizeAssignment(input, current):
@@ -155,7 +156,7 @@ def tokenizePattern(type, pattern , input, current):
         return [0, None];
 
 def skipWhiteSpace(input, current):
-    if input[current] == " ":
+    if input[current] == " " or input[current] == "\n" or input[current] == "\t":
         return [1, None]
     return [0, None]
 

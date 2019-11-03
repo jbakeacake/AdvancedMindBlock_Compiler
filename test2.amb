@@ -1,0 +1,17 @@
+START_PROGRAM
+INT apple;
+INT x;
+INT y;
+STRING z;
+[INT] array [5];
+
+CODE
+START_SUB main:
+  x := 15;
+  x := 15 * 2;
+  y := x + 3;
+  x := x + 1;
+  
+  GOSUB subB;
+END_SUB.
+END_PROGRAM.
