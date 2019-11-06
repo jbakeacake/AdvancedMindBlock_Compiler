@@ -11,8 +11,8 @@ fileContent = readFile(fileName)
 print(fileContent)
 
 tokens = Tokenizer(fileContent)
-for tok in tokens:
-    print(tok)
+for token in tokens:
+    print(token)
 
 parseTree = ParseTree()
 parseProgram(parseTree.head, tokens)

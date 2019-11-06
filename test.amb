@@ -1,7 +1,10 @@
 START_PROGRAM
 [INT] hi [3];
 [STRING] bye [2];
-CODE START_SUB main: 
+STRING str;
+INT num;
+CODE
+START_SUB main: 
         hi := 2 + 3 * 4;
         bye := INPUT;
         IF hi > 0 THEN
