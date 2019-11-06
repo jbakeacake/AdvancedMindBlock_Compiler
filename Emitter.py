@@ -1,3 +1,8 @@
+'''
+The Emitter is responsible for returning the correct C code to append to a runnable C file.
+'''
+
+
 termDictionary = {
         "digit" : emitIntegerLiteral,
         "assignment" : emitAssignmentLiteral,
