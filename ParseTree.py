@@ -1,12 +1,13 @@
 class Node:
-    def __init__(self, type, value, tokenOrVariable = None, parent = None, checked = 0):
+    def __init__(self, type, value, tokenOrVariable = None, parent = None, checked = 0, isLiteral = False):
         self.type = type
         self.value = value
         self.tokenOrVariable = tokenOrVariable
         self.parent = parent
         self.body = []
         self.bodyIdx = 0
-        self.checked = checked # this purely to use while dumping nodes, no other value
+        self.checked = checked
+        self.isLiteral = isLiteral
     
     def addChild(self, type, value = None, tokenOrVariable = None):
         if type != None:
@@ -25,7 +26,7 @@ class Node:
     def dumpNode(self, level):
         tabs = "\t" * (level)
         if self.checked == 0:
-            if self.tokenOrVariable is "token":
+            if self.tokenOrVariable == "token":
                 print(tabs + "VALUE : " + str(self.value))
             else:
                 print(tabs + "TYPE : " + self.type)
@@ -33,6 +34,7 @@ class Node:
         for child in self.body:
             for child in self.body:
                 child.dumpNode(level + 1)
+
             
 class ParseTree:
     def __init__(self, type = None):
