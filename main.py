@@ -1,19 +1,23 @@
-from ParseProgram import parseProgram
-from FileManager import readFile
-from ParseTree import Node
-from ParseTree import ParseTree
-from Tokenizer import *
+import os
+import Compiler
+from FileManager import *
 
-fileName = input("Please input the name of your '.amb' file:")
+# fileName = input("Please input the name of your '.amb' file:")
+inputContent = readFile("test.amb")
 
-fileContent = readFile(fileName)
+Compiler.constructFile(inputContent)
+os.system('cmd /k "cd ./RunnableFiles && gcc main.c"')
 
-print(fileContent)
+# print(fileContent)
 
-tokens = Tokenizer(fileContent)
-for token in tokens:
-    print(token)
+# myList = [2,2,3,4,5]
 
-parseTree = ParseTree()
-parseProgram(parseTree.head, tokens)
-parseTree.dumpTree()
+# for idx, term in enumerate(myList):
+#     print(myList[idx])
+# tokens = Tokenizer(fileContent)
+# for token in tokens:
+#     print(token)
+
+# parseTree = ParseTree()
+# parseProgram(parseTree.head, tokens)
+# parseTree.dumpTree()

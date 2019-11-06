@@ -1,16 +1,43 @@
 START_PROGRAM
-[INT] hi [3];
-[STRING] bye [2];
-STRING str;
-INT num;
+
+INT hi;
+INT index;
+STRING bye;
+[INT] nums [3];
+[STRING] names [3];
+
 CODE
-START_SUB main: 
+START_SUB main(): 
         hi := 2 + 3 * 4;
-        bye := INPUT;
-        IF hi > 0 THEN
-            PRINT(bye);
-        ELSE
-            PRINT(hi);
-        END_IF
+        bye = "Goodbye";
+        PRINT(hi);
+        PRINT(bye);
+
+        nums[0] := 1;
+        nums[1] := 2;
+        nums[2] := 3;
+
+        names[0] := "Bingo";
+        names[1] := "Bango";
+        names[2] := "Bongo";
+
+        PRINT(names[2]);
+
+        index := 0;
+
+        WHILE index < 3 DO
+            names[index] := "Huzzah";
+            index := index + 1;
+        END_WHILE
+
+        GOSUB printHello();
+
     END_SUB.
+
+START_SUB printHello():
+    PRINT("Hello");
+    bye := INPUT;
+    hi := INPUT;
+END_SUB.
+
 END_PROGRAM.

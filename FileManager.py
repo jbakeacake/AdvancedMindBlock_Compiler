@@ -14,9 +14,3 @@ def validateFileName(fileName):
     if fileExtension != ".amb":
         raise Exception("INVALID FILE EXTENSION. Please make sure that the file you are running ends with '.amb'")
 
-def createRunnable(fileName, codeList):
-    runnableFile = open(fileName, "a")
-    idx = 0
-    for codeLine in codeList:
-        print("Line " + str(idx) + ": " + codeLine)
-        runnableFile.write(codeLine)

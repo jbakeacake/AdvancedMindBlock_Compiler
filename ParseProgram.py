@@ -86,6 +86,9 @@ def addSubListChildren(currentNode, currentToken):
     if currentToken.get("type") in predictSet_0:
         currentNode.addChild("START_SUB", None, "token")
         currentNode.addChild("label", None, "token")
+        # add "(" and ")" so we can properly call our Subroutines in C
+        currentNode.addChild("softOpen", None, "token")
+        currentNode.addChild("softClose", None, "token")
         currentNode.addChild("colon", None, "token")
         currentNode.addChild("CodeList")
         currentNode.addChild("SubList")
@@ -146,7 +149,6 @@ def parseTokenLiteral(currentNode, currentToken):
         "semi",
         "colon",
         "START_PROGRAM",
-        "END_PROGRAM",
         "START_SUB",
         "END_SUB",
         "GOSUB",

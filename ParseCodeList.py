@@ -77,6 +77,8 @@ def addCodeLineChildren(currentNode, currentToken):
     elif currentToken.get("type") == "GOSUB":
         currentNode.addChild("GOSUB", None, "token")
         currentNode.addChild("label", None, "token")
+        currentNode.addChild("softOpen", None, "token")
+        currentNode.addChild("softClose", None, "token")
         currentNode.addChild("semi", None, "token")
     else:
         raise Exception("Error on CodeLine")

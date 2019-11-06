@@ -127,6 +127,8 @@ def addFactorChildren(currentNode, currentToken):
     elif currentToken.get("type") in predictSet_3:
         currentNode.addChild("label", None, "token")
         currentNode.addChild("PossibleArray")
+    else:
+        raise Exception("Error on Factor")
 
 def addPossibleArrayChildren(currentNode, currentToken):
     predictSet_0 = [
@@ -145,7 +147,7 @@ def addPossibleArrayChildren(currentNode, currentToken):
 
     if currentToken.get("type") in predictSet_0:
         currentNode.addChild("hardOpen", None, "token")
-        currentNode.addChild("digit", None, "token")
+        currentNode.addChild("Factor") # Changed from "digit" to "Factor" so we can loop through arrays
         currentNode.addChild("hardClose", None, "token")
     elif currentToken.get("type") in predictSet_1:
         currentNode.addChild(None)

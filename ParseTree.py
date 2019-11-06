@@ -1,13 +1,11 @@
 class Node:
-    def __init__(self, type, value, tokenOrVariable = None, parent = None, checked = 0, isLiteral = False):
+    def __init__(self, type, value, tokenOrVariable = None, parent = None, isLiteral = False):
         self.type = type
         self.value = value
         self.tokenOrVariable = tokenOrVariable
         self.parent = parent
         self.body = []
         self.bodyIdx = 0
-        self.checked = checked
-        self.isLiteral = isLiteral
     
     def addChild(self, type, value = None, tokenOrVariable = None):
         if type != None:
@@ -25,15 +23,19 @@ class Node:
             return rtnNode
     def dumpNode(self, level):
         tabs = "\t" * (level)
-        if self.checked == 0:
-            if self.tokenOrVariable == "token":
-                print(tabs + "VALUE : " + str(self.value))
-            else:
-                print(tabs + "TYPE : " + self.type)
-            self.checked = 1
+        if self.tokenOrVariable == "token":
+            print(tabs + "VALUE : " + str(self.value))
+        else:
+            print(tabs + "TYPE : " + self.type)
         for child in self.body:
-            for child in self.body:
-                child.dumpNode(level + 1)
+            child.dumpNode(level + 1)
+
+    def writeNode(self, codeTermList):
+        if self.tokenOrVariable =="token":
+            codeTermList.append(self)
+        for child in self.body:
+            child.writeNode(codeTermList)
+    
 
             
 class ParseTree:
@@ -42,3 +44,7 @@ class ParseTree:
 
     def dumpTree(self):
         self.head.dumpNode(0)
+
+    def writeTree(self, codeTermList):
+        self.head.writeNode(codeTermList)
+    
