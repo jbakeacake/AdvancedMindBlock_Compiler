@@ -1,0 +1,13 @@
+START_PROGRAM
+[INT] hi [3];
+[STRING] bye [2];
+CODE START_SUB main: 
+        hi := 2 + 3 * 4;
+        bye := INPUT;
+        IF hi > 0 THEN
+            PRINT(bye);
+        ELSE
+            PRINT(hi);
+        END_IF
+    END_SUB.
+END_PROGRAM.
