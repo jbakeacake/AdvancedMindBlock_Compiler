@@ -1,13 +1,20 @@
 START_PROGRAM
 
 INT hi;
-INT index;
+INT idx;
 STRING bye;
 [INT] nums [3];
 [STRING] names [3];
 
 CODE
-START_SUB main(): 
+
+START_SUB printHello:
+    PRINT("Hello");
+    bye := INPUT;
+    hi := INPUT;
+END_SUB.
+
+START_SUB main: 
         hi := 2 + 3 * 4;
         bye = "Goodbye";
         PRINT(hi);
@@ -23,21 +30,15 @@ START_SUB main():
 
         PRINT(names[2]);
 
-        index := 0;
+        idx := 0;
 
-        WHILE index < 3 DO
-            names[index] := "Huzzah";
-            index := index + 1;
+        WHILE idx < 3 DO
+            names[idx] := "Huzzah";
+            idx := idx + 1;
         END_WHILE
 
         GOSUB printHello();
 
     END_SUB.
-
-START_SUB printHello():
-    PRINT("Hello");
-    bye := INPUT;
-    hi := INPUT;
-END_SUB.
 
 END_PROGRAM.

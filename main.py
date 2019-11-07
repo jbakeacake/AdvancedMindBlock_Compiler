@@ -6,7 +6,7 @@ from FileManager import *
 inputContent = readFile("test.amb")
 
 Compiler.constructFile(inputContent)
-os.system('cmd /k "cd ./RunnableFiles && gcc main.c"')
+os.system("cd ./RunnableFiles && gcc main.c -o main")
 
 # print(fileContent)
 

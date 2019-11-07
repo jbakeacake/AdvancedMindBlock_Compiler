@@ -33,7 +33,7 @@ def emitCompOpLiteral(node):
 def emitSemiLiteral(node):
     return "; \r"
 def emitColonType(node):
-    return "{ \r"
+    return "() { \r"
 def emitSTART_PROGRAM(node):
     return "#include <stdlib.h>\r#include <stdio.h> \r"
 def emitSTART_SUB(node):
