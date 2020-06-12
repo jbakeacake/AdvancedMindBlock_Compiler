@@ -4,16 +4,16 @@ A program written in Python 3.7 to tokenize all keywords, symbols, integer, char
 AdvancedMindBlock is really simple functional programming language that fulfills the very basic of what makes a programming language a programming language (input, output, arithmetic, conditionals, and looping).
 
 # Table of Contents
-- [Quick Start](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#quick-start)
-- [Hello World: Writing your First Lines of AMB](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#hello-world-writing-your-first-lines-of-amb)
-  - [Setting Up Our File](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#setting-up-your-file)
-  - [Encapsulating our Code](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#encapsulating-our-code)
-  - [Declaring and Initializing Variables](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#declaring-and-initializing-varibles)
-  - [Creating Our First Subroutine](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#creating-our-first-subroutine)
-  - [Loops and Conditionals](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#loops-and-conditionals)
-  - [Printing Out Our Answers](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#printing-out-our-answers)
-- [Compiling Our AMB File](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#compiling-our-amb-file)
-- [Dependencies/Technicals](https://github.com/jbakeacake/AdvancedMindBlock_Compiler/new/master?readme=1#dependencies--technicals)
+- [Quick Start](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#quick-start)
+- [Hello World: Writing your First Lines of AMB](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#hello-world-writing-your-first-lines-of-amb)
+  - [Setting Up Our File](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#setting-up-your-file)
+  - [Encapsulating our Code](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#encapsulating-our-code)
+  - [Declaring and Initializing Variables](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#declaring-and-initializing-varibles)
+  - [Creating Our First Subroutine](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#creating-our-first-subroutine)
+  - [Loops and Conditionals](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#loops-and-conditionals)
+  - [Printing Out Our Answers](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#printing-out-our-answers)
+- [Compiling Our AMB File](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#compiling-our-amb-file)
+- [Dependencies/Technicals](https://github.com/jbakeacake/AdvancedMindBlock_Compiler#dependencies--technicals)
 ## Quick Start
 To get a quick glimpse of the compiler, start by navigating to ```C:\...\my\path\to\AdvancedMindBlock_Compiler\``` and opening up ```test.amb``` with any text editor (notepad, vscode, sublime, atom, etc.) then examine some of the 
 code inside our ```.amb``` file. Notice that the bulk of our code occurs inside our ```main``` method. In order for any ```.amb``` file to execute, it requires a ```main``` subroutine. Also, notice our ```printHello``` subroutine is written above our ```main``` subroutine.
