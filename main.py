@@ -8,7 +8,7 @@ inputContent = readFile("test.amb")
 Compiler.constructFile(inputContent)
 os.system("echo ##############")
 os.system("echo __________________________")
-os.system("echo Advance Mind Block Output:")
+os.system("echo Advanced Mind Block Output:")
 os.system("echo __________________________")
 os.system("cd ./RunnableFiles && gcc main.c -o main && main")
 
