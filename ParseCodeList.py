@@ -111,12 +111,18 @@ def addThenCodeListChildren(currentNode, currentToken):
         "ELSE"
     ]
 
+    predictSet_2 = [
+        "END_IF"
+    ]
+
     if currentToken.get("type") in predictSet_0:
         currentNode.addChild("CodeLine")
         currentNode.addChild("ThenCodeList")
     elif currentToken.get("type") in predictSet_1:
         currentNode.addChild("ELSE", None, "token")
         currentNode.addChild("ElseCodeList")
+    elif currentToken.get("type") in predictSet_2:
+        currentNode.addChild("END_IF", None, "token")
     else:
         raise Exception("Error on ThenCodeList")
 

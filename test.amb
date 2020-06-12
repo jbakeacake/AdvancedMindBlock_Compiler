@@ -2,6 +2,8 @@ START_PROGRAM
 
 INT hi;
 INT idx;
+INT counter;
+INT factorialRes;
 STRING bye;
 [INT] nums [3];
 [STRING] names [3];
@@ -10,13 +12,12 @@ CODE
 
 START_SUB printHello:
     PRINT("Hello");
-    bye := INPUT;
-    hi := INPUT;
 END_SUB.
+
 
 START_SUB main: 
         hi := 2 + 3 * 4;
-        bye = "Goodbye";
+        bye := "Goodbye";
         PRINT(hi);
         PRINT(bye);
 
@@ -33,12 +34,15 @@ START_SUB main:
         idx := 0;
 
         WHILE idx < 3 DO
-            names[idx] := "Huzzah";
+            names[idx] := "Name";
             idx := idx + 1;
         END_WHILE
+        
+        PRINT(names[0]);
+        PRINT(names[1]);
+        PRINT(names[2]);
 
         GOSUB printHello();
-
     END_SUB.
 
 END_PROGRAM.

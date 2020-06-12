@@ -1,17 +1,36 @@
 START_PROGRAM
-INT apple;
+
 INT x;
 INT y;
-STRING z;
-[INT] array [5];
+INT factorialOf;
+INT counter;
+INT result;
 
 CODE
-START_SUB main:
-  x := 15;
-  x := 15 * 2;
-  y := x + 3;
-  x := x + 1;
-  
-  GOSUB subB;
+
+START_SUB findFactorial:
+  result := factorialOf;
+  counter := factorialOf - 1;
+  IF result != 1 THEN
+      WHILE counter > 0 DO
+        result := result * counter;
+        counter := counter - 1;
+      END_WHILE
+  ELSE
+    PRINT("Enter a REAL number please! \n");
+  END_IF
 END_SUB.
+
+START_SUB main:
+  x := 5;
+  y := 10;
+  factorialOf := x;
+  GOSUB findFactorial();
+  PRINT(result);
+
+  factorialOf := 1;
+  GOSUB findFactorial();
+  PRINT(result);
+END_SUB.
+
 END_PROGRAM.
