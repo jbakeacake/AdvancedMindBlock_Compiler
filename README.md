@@ -22,7 +22,7 @@ To avoid any potential errors, make sure that any subroutine is written before o
 Feel free to make some changes to some of the variables in the ```.amb``` file. Once you're finished making your changes, run the ```main.py``` python file, to compile your newly updated ```.amb``` file.
 
 ## Hello World: Writing your first lines of AMB
-In this section, I'll cover some of the basics of our language. First, we're going to look at creating our own ```.amb``` file, and printing out "Hello World" to the console.
+In this section, I'll cover some of the basics of our language. First, we're going to look at creating our own ```.amb``` file, and actually coding up a subroutine that will do some arithmetic, and print some values out for us. This section aims to introduce you to the main features of the AMB language.
 
 ### Setting up our file
 Start by making a new file inside ```C:\...\my\path\to\AdvancedMindBlock_Compiler\``` directory with the file extension ```.amb```.
