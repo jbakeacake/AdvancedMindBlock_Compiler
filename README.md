@@ -30,7 +30,7 @@ Start by making a new file inside ```C:\...\my\path\to\AdvancedMindBlock_Compile
 Example: ```myFile.amb```
 
 ### Encapsulating our code
-Any code written in our file must be encapsulated with the two identifiers, ```START_PROGRAM``` and ```END_PROGRAM.```. In addition to this, we need to make sure we have a ```main``` method to run our code. Any code you want to be executed must be written inside this method.
+Any code written in our file must be encapsulated with the two identifiers, ```START_PROGRAM``` and ```END_PROGRAM.```. After the ```START_PROGRAM``` identifier, you can start declaring some variables, which we'll get to later. After the declaration of variables, we need to place a ```CODE``` identifier before any subroutines. In addition to this, we need to make sure we have a ```main``` method to run our code. Any code you want to be executed must be written inside this method.
 
 <br/>So our first few lines of code should be:
 ``` 
