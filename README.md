@@ -209,7 +209,7 @@ END_SUB.
 END_PROGRAM.
 ```
 
-Great! Everything should be in order with our ```.amb``` file. All we have to do compile it, and run it!
+Great! Everything should be in order with our ```.amb``` file. All we have to do is compile it, and run it!
 
 If you wanna make sure your code matches what we've wrote, you can see the full code below:
 ``` 
